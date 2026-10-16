@@ -1,0 +1,100 @@
+:root {
+  --bg: #6B4426;
+  --txdest: #D2B48C;
+  --caixatxbord: #94653D;
+  --bgform: #241510;
+  --caixatx: #6B4426;
+  --butt: #5E6B2E;
+  --butthover: #4E5A24;
+}
+
+*{
+    font-family: 'Courier New', Courier, monospace;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    background: var(--bg);
+    color: var(--bgform);
+    margin: 0;
+    padding: 0;
+    width: 100%;
+}
+
+h1 {
+    color: var(--txdest);
+    text-align: center;
+}
+
+header {
+    padding: 15px;
+    text-align: center;
+}
+
+form {
+    justify-content: center;
+    gap: 20px;
+
+    background-color: var(--bgform);
+    color: var(--txdest);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    border-radius: 5px;
+
+    width: 100%;
+    max-width: 400px;
+    margin: 0 auto;
+    padding: 20px;
+    box-sizing: border-box;
+
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    
+}
+
+.campo {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+input{
+    font-family: inherit;
+    color: var(--txdest);
+    background-color: var(--caixatx);
+
+    width: 100%;
+    box-sizing: border-box;
+
+    padding: 10px;
+    border: 1px solid var(--caixatxbord);
+    border-radius: 5px;
+    font-size: 1rem;
+}
+
+button {
+    font-family: inherit;
+    background-color: var(--butt);
+    color: var(--txdest);
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1rem;
+}
+button:hover {
+    background-color: var(--butthover);
+}
+
+.final {
+    background-color: var(--bgform);
+    text-align: center;
+    color: var(--txdest);
+    padding: 30px;
+}
+
+.mai {
+    display: flex;
+    flex-direction: column;
+}
