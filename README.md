@@ -25,7 +25,9 @@ Abaixo estão as pastas com os códigos criados até o momento:
 
 *   **[01-formulario-multietapas-pdo](./01-formulario-multietapas-pdo/)**
     *   *O que foi estudado:* Criação de um formulário dividido em telas separadas (credênciais, dados pessoais e endereço) utilizando sessões nativas para transitar os dados, e persistência no MySQL utilizando PDO com consultas tratadas contra SQL Injection.
-*   *(Próximos exercícios serão adicionados aqui conforme eu for avançando...)*
+*  **[02-exercicio-transicao-de-tarefas](./02-exercicio-transicao-de-tarefas/)**
+	* *O que foi estudado:* Ainda em desenvolvimento. 
+* *(Próximos exercícios serão adicionados aqui conforme eu for avançando...)*
 
 ---
 
