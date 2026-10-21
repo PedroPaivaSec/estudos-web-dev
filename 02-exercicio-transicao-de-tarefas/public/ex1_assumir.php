@@ -1,7 +1,8 @@
 <?php 
 
 session_start();
-require_once "connect.php";
+require_once __DIR__ . '/../config/connect.php';
+var_dump($_SESSION);
 
 ?>
 
@@ -11,7 +12,7 @@ require_once "connect.php";
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Exercício 1: assumir tarefa solta</title>
-  <link rel="stylesheet" href="estilo.css">
+  <link rel="stylesheet" href="css/estilo.css">
 </head>
 <body>
 <main>
@@ -19,7 +20,7 @@ require_once "connect.php";
   <p class="apoio">Demandas gerais sem responsável. Quem estiver livre assume.</p>
 
   <!-- Simula o login. No projeto real o usuário vem do login, nunca de um select. -->
-  <form class="barra" method="post" action="trocar_usuario.php">
+  <form class="barra" method="post" action="../config/trocar_usuario.php">
     <label for="usuario">Agir como</label>
     <select id="usuario" name="usuario_id">
       <option value="1">Ana (id 1)</option>
@@ -43,7 +44,7 @@ require_once "connect.php";
         <td>Em aguardo</td>
         <td>Ninguém</td>
         <td>
-          <form method="post" action="assumir.php">
+          <form method="post" action="../config/assumir.php">
             <input type="hidden" name="tarefa_id" value="1">
             <button type="submit">Assumir</button>
           </form>

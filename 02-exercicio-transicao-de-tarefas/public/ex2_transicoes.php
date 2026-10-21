@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Exercício 2: transições de status</title>
-  <link rel="stylesheet" href="estilo.css">
+  <link rel="stylesheet" href="css/estilo.css">
 </head>
 <body>
 <main>
@@ -12,7 +12,7 @@
   <p class="apoio">Conclua, reabra ou devolva para o grupo.</p>
 
   <!-- Simula o login. No projeto real o usuário vem do login, nunca de um select. -->
-  <form class="barra" method="post" action="trocar_usuario.php">
+  <form class="barra" method="post" action="../config/trocar_usuario.php">
     <label for="usuario">Agir como</label>
     <select id="usuario" name="usuario_id">
       <option value="1">Ana (id 1)</option>
@@ -36,11 +36,11 @@
         <td>Em andamento</td>
         <td>-</td>
         <td>
-          <form method="post" action="concluir.php">
+          <form method="post" action="../config/concluir.php">
             <input type="hidden" name="tarefa_id" value="1">
             <button type="submit">Concluir</button>
           </form>
-          <form method="post" action="devolver.php">
+          <form method="post" action="../config/devolver.php">
             <input type="hidden" name="tarefa_id" value="1">
             <button type="submit">Devolver</button>
           </form>
@@ -51,7 +51,7 @@
         <td>Concluída</td>
         <td>20/10/2026 14:32</td>
         <td>
-          <form method="post" action="reabrir.php">
+          <form method="post" action="../config/reabrir.php">
             <input type="hidden" name="tarefa_id" value="2">
             <button type="submit">Reabrir</button>
           </form>

@@ -1,10 +1,10 @@
 <?php
 
 session_start();
-require_once "connect.php";
+require_once __DIR__ . '/connect.php';
 
 if (!isset($_SESSION['usuario_id'])) {
-    header("Location: ./ex1_assumir.php");
+    header("Location: ../public/ex1_assumir.php");
     exit;
 }
 
@@ -12,7 +12,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     if (!isset($_POST['tarefa_id'])) {
         error_log("Um POST chegou sem tarefa_id");
-        header("Location: ./ex1_assumir.php");
+        header("Location: ../public/ex1_assumir.php");
         exit;
     }
 
@@ -22,12 +22,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if ($task === false) {
 
         error_log("Id inválido para essa tarefa");
-        header("Location: ./ex1_assumir.php");
+        header("Location: ../public/ex1_assumir.php");
         exit;
     } elseif ($usr === false) {
 
         error_log("Id inválido para esse usuario");
-        header("Location: ./ex1_assumir.php");
+        header("Location: ../public/ex1_assumir.php");
         exit;
     } else {
 
@@ -39,7 +39,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 ':taskid' => $task
             ]);
             $cont = $stmt->rowCount();
-            header("Location: ./ex1_assumir.php");
+            header("Location: ../public/ex1_assumir.php");
             exit;
         } catch (PDOException $e) {
 
@@ -48,6 +48,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
     }
 } else {
-    header("Location: ./ex1_assumir.php");
+    header("Location: ../public/ex1_assumir.php");
     exit;
 }
