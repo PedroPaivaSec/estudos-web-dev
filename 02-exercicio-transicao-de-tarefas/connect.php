@@ -2,8 +2,8 @@
 
 $host = 'localhost';
 $dbname = 'exercicios';
-$user = 'task';
-$password = '123456';
+$user = 'root';
+$password = '';
 $charset = 'utf8mb4';
 
 $dsn = "mysql:host=$host;dbname=$dbname;charset=$charset";
