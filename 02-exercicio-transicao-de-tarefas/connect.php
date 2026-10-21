@@ -2,8 +2,8 @@
 
 $host = 'localhost';
 $dbname = 'exercicios';
-$user = 'root';
-$password = '';
+$user = 'task';
+$password = '123456';
 $charset = 'utf8mb4';
 
 $dsn = "mysql:host=$host;dbname=$dbname;charset=$charset";
@@ -15,11 +15,13 @@ $options = [
 
 try{
 
-    $conn = new PDO($dsn, $user, $password, $options);
-    echo "CONECTADO";
-}catch(\PDOException $e){
+    $pdo = new PDO($dsn, $user, $password, $options);
 
-    echo 'Erro de conexão';
+}catch(PDOException $e){
+
+    error_log('Erro de conexão' . $e->getMessage());
+    die("Erro na conexão com o banco.");
+
 }
 
 ?>
