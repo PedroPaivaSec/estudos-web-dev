@@ -1,8 +1,8 @@
-<?php 
+<?php
 
 $host = 'localhost';
 $dbname = 'exercicios';
-$user = 'root';
+$user = 'task';
 $password = '';
 $charset = 'utf8mb4';
 
@@ -13,15 +13,11 @@ $options = [
     PDO::ATTR_EMULATE_PREPARES   => false,
 ];
 
-try{
+try {
 
     $pdo = new PDO($dsn, $user, $password, $options);
-
-}catch(PDOException $e){
+} catch (PDOException $e) {
 
     error_log('Erro de conexão ' . $e->getMessage());
     die("Erro na conexão com o banco.");
-
 }
-
-?>
