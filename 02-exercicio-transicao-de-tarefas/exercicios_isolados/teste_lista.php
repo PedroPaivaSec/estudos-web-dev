@@ -13,13 +13,13 @@ try {
     $result = $stmt->fetchAll(); //armazena todas as linhas retornadas da consulta
 
     echo "<ul>";
-    foreach($result as $key => $resultado){ //para cada dado($resultado) dentro de $result, imprime na tela o que foi consultado
-       
+    foreach ($result as $resultado) { //para cada dado($resultado) dentro de $result, imprime na tela o que foi consultado
+
         echo "<li>" . htmlspecialchars($resultado['id'], ENT_QUOTES, 'UTF-8') . htmlspecialchars($resultado['nome'], ENT_QUOTES, 'UTF-8') . "</li>";
     }
     echo "</ul>";
 
-//catch: Gera erro se o comando falhar
+    //catch: Gera erro se o comando falhar
 } catch (PDOException $e) {
 
     error_log("Erro na seleção: " . $e->getMessage());
