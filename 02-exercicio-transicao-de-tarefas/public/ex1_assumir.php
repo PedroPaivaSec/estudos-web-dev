@@ -2,6 +2,9 @@
 
 session_start();
 require_once __DIR__ . '/../config/connect.php';
+var_dump($_SESSION['msg']);
+var_dump($_SESSION['usuario_id']);
+unset($_SESSION['msg']);
 
 ?>
 

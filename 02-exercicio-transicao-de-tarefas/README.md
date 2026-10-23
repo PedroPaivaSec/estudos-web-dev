@@ -26,13 +26,13 @@ Uma tarefa "solta" (sem responsável) é visível para todos os usuários, e qua
   - [x] `filter_var` com `FILTER_VALIDATE_INT` e comparação com `=== false`
 - [ ] **Etapa 3: listagem no `ex1_assumir.php`** (em andamento)
   - [x] `teste_lista.php` isolado funcionando (regra do exercício isolado)
-  - [ ] SELECT das tarefas soltas (`responsavel IS NULL`)
+  - [x] SELECT das tarefas soltas (`responsavel IS NULL`)
   - [ ] `fetchAll` e `foreach` no `<tbody>`
   - [ ] `value` do campo escondido com o id real da tarefa
   - [ ] Todo texto vindo do banco com `htmlspecialchars`
-- [ ] **Etapa 4: resultado atravessar o redirecionamento**
-  - [ ] `assumir.php` grava o recado na sessão conforme o `rowCount()` (1 = sucesso, 0 = já assumida)
-  - [ ] `ex1_assumir.php` lê o recado, apaga e exibe a mensagem uma única vez
+- [ ] **Etapa 4: resultado atravessar o redirecionamento**(Parcialmente pronto, falta ajustar o visual da mensagem a ser exibida)
+  - [x] `assumir.php` grava o recado na sessão conforme o `rowCount()` (1 = sucesso, 0 = já assumida)
+  - [x] `ex1_assumir.php` lê o recado, apaga e exibe a mensagem uma única vez
 - [ ] **Etapa 5: limpeza**
   - [ ] Remover o `var_dump($_SESSION)`
   - [x] Tratar POST sem `tarefa_id`
