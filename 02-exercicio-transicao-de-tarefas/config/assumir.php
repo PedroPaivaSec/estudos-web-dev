@@ -43,17 +43,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $count = $stmt->rowCount();
 
         if ($count == 1) {
-            $_SESSION['flash']['msg'] = '1';
-        };
-        if ($count == 0) {
-            $_SESSION['flash']['msg'] = '0';
-        };
+            $_SESSION['flash'] = ['sucesso' => 'Tarefa assumida com sucesso.'];
+        }else{
+            $_SESSION['flash'] = ['erro' => 'Esta tarefa já foi assumida por outra pessoa.'];
+        }
         header("Location: ../public/ex1_assumir.php");
         exit;
     } catch (PDOException $e) {
 
         error_log("Erro de atribuição: " . $e->getMessage());
-        die("Falha ao atribuir a tarefa para esse usuário");
+        header("Location: ../public/ex1_assumir.php");
+        exit;
     }
 } else {
 

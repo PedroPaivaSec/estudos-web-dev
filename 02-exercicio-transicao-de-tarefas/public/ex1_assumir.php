@@ -3,6 +3,13 @@
 session_start();
 require_once __DIR__ . '/../config/connect.php';
 
+if (isset($_SESSION['flash'])) {
+  $flash = $_SESSION['flash'];
+}
+
+unset($_SESSION['flash']);
+
+var_dump($flash);
 ?>
 
 <!DOCTYPE html>
@@ -31,15 +38,23 @@ require_once __DIR__ . '/../config/connect.php';
     </form>
 
     <!-- Mensagem de retorno: o PHP imprime UMA destas duas, conforme o resultado -->
-    <?php if (isset($_SESSION['flash']['msg'])) { ?>
-      <?php if ($_SESSION['flash']['msg'] == '1') { ?>
-        <div class="aviso ok" role="status">Tarefa assumida com sucesso.</div>
-      <?php }; ?>
-      <?php if ($_SESSION['flash']['msg'] == '0') { ?>
-        <div class="aviso erro" role="alert">Esta tarefa já foi assumida por outra pessoa.</div>
-    <?php
-      };
+    <?php if (isset($_SESSION['flash'])) {
+
+      if ($_SESSION['flash'] == 'Tarefa assumida com sucesso.') { ?>
+        <div class="aviso ok" role="status"> <?php echo $_SESSION['flash'] ?></div>
+      <?php }
+
+      if ($_SESSION['flash'] == 'Esta tarefa já foi assumida por outra pessoa.') { ?>
+        <div class="aviso erro" role="alert"><?php echo $_SESSION['flash'] ?></div>
+      <?php
+      }
       unset($_SESSION['flash']);
+    }
+
+    if (!isset($_SESSION['usuario_id'])) { ?>
+
+      <div class="aviso erro" role="alert">Clique em trocar para Assumir a tarefa.</div>
+    <?php
     }
     ?>
 
