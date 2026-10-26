@@ -2,9 +2,6 @@
 
 session_start();
 require_once __DIR__ . '/../config/connect.php';
-var_dump($_SESSION['msg']);
-var_dump($_SESSION['usuario_id']);
-unset($_SESSION['msg']);
 
 ?>
 
@@ -34,8 +31,17 @@ unset($_SESSION['msg']);
     </form>
 
     <!-- Mensagem de retorno: o PHP imprime UMA destas duas, conforme o resultado -->
-    <div class="aviso ok" role="status">Tarefa assumida com sucesso.</div>
-    <div class="aviso erro" role="alert">Esta tarefa já foi assumida por outra pessoa.</div>
+    <?php if (isset($_SESSION['flash']['msg'])) { ?>
+      <?php if ($_SESSION['flash']['msg'] == '1') { ?>
+        <div class="aviso ok" role="status">Tarefa assumida com sucesso.</div>
+      <?php }; ?>
+      <?php if ($_SESSION['flash']['msg'] == '0') { ?>
+        <div class="aviso erro" role="alert">Esta tarefa já foi assumida por outra pessoa.</div>
+    <?php
+      };
+      unset($_SESSION['flash']);
+    }
+    ?>
 
     <table>
       <thead>
@@ -60,10 +66,26 @@ unset($_SESSION['msg']);
           </td>
         </tr>
         <tr>
+          <td>Emitir certidões negativas</td>
+          <td>Em aguardo</td>
+          <td>Ninguém</td>
+          <td>
+            <form method="post" action="../config/assumir.php">
+              <input type="hidden" name="tarefa_id" value="2">
+              <button type="submit">Assumir</button>
+            </form>
+          </td>
+        </tr>
+        <tr>
           <td>Organizar pasta de documentos</td>
-          <td>Em andamento</td>
-          <td>Ana</td>
-          <td>Indisponível</td>
+          <td>Em aguardo</td>
+          <td>Ninguém</td>
+          <td>
+            <form method="post" action="../config/assumir.php">
+              <input type="hidden" name="tarefa_id" value="3">
+              <button type="submit">Assumir</button>
+            </form>
+          </td>
         </tr>
       </tbody>
     </table>
