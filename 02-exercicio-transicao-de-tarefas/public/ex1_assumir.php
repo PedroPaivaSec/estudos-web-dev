@@ -3,11 +3,12 @@
 session_start();
 require_once __DIR__ . '/../config/connect.php';
 
+$flash = null;
+
 if (isset($_SESSION['flash'])) {
   $flash = $_SESSION['flash'];
+  unset($_SESSION['flash']);
 }
-
-unset($_SESSION['flash']);
 
 var_dump($flash);
 ?>
