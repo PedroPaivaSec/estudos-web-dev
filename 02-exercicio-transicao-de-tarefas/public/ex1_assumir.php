@@ -10,7 +10,6 @@ if (isset($_SESSION['flash'])) {
   unset($_SESSION['flash']);
 }
 
-var_dump($flash);
 ?>
 
 <!DOCTYPE html>
@@ -39,25 +38,20 @@ var_dump($flash);
     </form>
 
     <!-- Mensagem de retorno: o PHP imprime UMA destas duas, conforme o resultado -->
-    <?php if (isset($_SESSION['flash'])) {
+    <?php if (isset($flash)) {
 
-      if ($_SESSION['flash'] == 'Tarefa assumida com sucesso.') { ?>
-        <div class="aviso ok" role="status"> <?php echo $_SESSION['flash'] ?></div>
-      <?php }
-
-      if ($_SESSION['flash'] == 'Esta tarefa já foi assumida por outra pessoa.') { ?>
-        <div class="aviso erro" role="alert"><?php echo $_SESSION['flash'] ?></div>
-      <?php
+      if (isset($flash['sucesso'])) { ?>
+        <div class="aviso ok" role="status"> <?php echo htmlspecialchars($flash['sucesso'], ENT_QUOTES, 'UTF-8') ?></div>
+      <?php } elseif (isset($flash['erro'])) { ?>
+        <div class="aviso erro" role="alert"><?php echo htmlspecialchars($flash['erro'], ENT_QUOTES, 'UTF-8') ?></div>
+    <?php
       }
-      unset($_SESSION['flash']);
-    }
+    } ?>
 
-    if (!isset($_SESSION['usuario_id'])) { ?>
+    <?php if (!isset($_SESSION['usuario_id'])) { ?>
 
       <div class="aviso erro" role="alert">Clique em trocar para Assumir a tarefa.</div>
-    <?php
-    }
-    ?>
+    <?php } ?>
 
     <table>
       <thead>

@@ -42,9 +42,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         $count = $stmt->rowCount();
 
-        if ($count == 1) {
+        if ($count === 1) {
             $_SESSION['flash'] = ['sucesso' => 'Tarefa assumida com sucesso.'];
-        }else{
+        } else {
             $_SESSION['flash'] = ['erro' => 'Esta tarefa já foi assumida por outra pessoa.'];
         }
         header("Location: ../public/ex1_assumir.php");
@@ -52,6 +52,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     } catch (PDOException $e) {
 
         error_log("Erro de atribuição: " . $e->getMessage());
+        $_SESSION['flash'] = ['erro' => 'Erro ao atribuir tarefa.'];
         header("Location: ../public/ex1_assumir.php");
         exit;
     }
