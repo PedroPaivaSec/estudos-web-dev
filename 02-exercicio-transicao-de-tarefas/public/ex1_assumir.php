@@ -5,23 +5,20 @@ require_once __DIR__ . '/../config/connect.php';
 
 $flash = null;
 
+try {
+  $query = "SELECT id, titulo, status FROM tarefas WHERE responsavel_id IS NULL ORDER BY id";
+  $stmt = $pdo->prepare($query);
+  $stmt->execute();
+  $tarefas = $stmt->fetchAll();
+} catch (PDOException $e) {
+  error_log("Falha ao realizar consulta: " . $e->getMessage());
+  die("Falha ao carregar as tarefas.");
+}
+
 if (isset($_SESSION['flash'])) {
   $flash = $_SESSION['flash'];
   unset($_SESSION['flash']);
 }
-
-try {
-
-  $query = "SELECT id, titulo, status, responsavel_id FROM tarefas ORDER BY id;";
-  $stmt = $pdo->prepare($query);
-  $stmt->execute();
-  $consul = $stmt->fetchAll();
-} catch (PDOException $e) {
-  error_log("Falha ao realizar consulta" . $e->getMessage());
-  header("Location: ../public/ex1_assumir.php");
-  exit();
-}
-var_dump($consul);
 ?>
 
 <!DOCTYPE html>
@@ -47,6 +44,9 @@ var_dump($consul);
         <option value="2">Bruno (id 2)</option>
       </select>
       <button type="submit">Trocar</button>
+    </form>
+    <form class="barra" method="POST" action="../config/reset_banco.php">
+      <button type="submit">reset</button>
     </form>
 
     <!-- Mensagem de retorno: o PHP imprime UMA destas duas, conforme o resultado -->
@@ -75,17 +75,17 @@ var_dump($consul);
         </tr>
       </thead>
       <tbody>
-        <!-- Repita esta linha com um foreach do PHP -->
-        <?php foreach ($consul as $tarefa) { ?>
+        <?php foreach ($tarefas as $tarefa) {
+          $rotulo = ['em_aguardo' => 'Em Aguardo', 'em_andamento' => 'Em Andamento', 'conluida' => 'Concluida'];
+          $rotuloTrad = $rotulo[$tarefa['status']] ?? 'Desconhecido'; ?>
           <tr>
             <td><?php echo htmlspecialchars($tarefa['titulo'], ENT_QUOTES, 'UTF-8') ?></td>
 
-            <td><?php echo htmlspecialchars($tarefa['status'], ENT_QUOTES, 'UTF-8') ?></td>
-
-            <td><?php echo htmlspecialchars($tarefa['responsavel_id'], ENT_QUOTES, 'UTF-8') ?></td>
+            <td><?php echo htmlspecialchars($rotuloTrad, ENT_QUOTES, 'UTF-8') ?></td>
+            <td>Ninguém</td>
             <td>
               <form method="post" action="../config/assumir.php">
-                <input type="hidden" name="tarefa_id" value="<?php echo $tarefa['id'] ?>">
+                <input type="hidden" name="tarefa_id" value="<?php echo htmlspecialchars($tarefa['id'], ENT_QUOTES, 'UTF-8') ?>">
                 <button type="submit">Assumir</button>
               </form>
             </td>
