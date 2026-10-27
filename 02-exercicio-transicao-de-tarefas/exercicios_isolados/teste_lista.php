@@ -2,12 +2,12 @@
 //exercicio isolado para praticar o uso de htmlspecialchars e percorrer lista de usuários na tabela com foreach
 
 //conecta com o banco usando o arquivo connect
-require_once __DIR__ . "/connect.php";
+require_once __DIR__ . "/../config/connect.php";
 
 //try: Realiza a execução do select no banco de dados
 try {
 
-    $query = "SELECT * FROM usuarios"; //query montada
+    $query = "SELECT titulo, responsavel_id FROM tarefas"; //query montada
     $stmt = $pdo->prepare($query); //pdo prepara a query dentro da variavel stmt
     $stmt->execute(); //executa a query
     $result = $stmt->fetchAll(); //armazena todas as linhas retornadas da consulta
@@ -15,7 +15,7 @@ try {
     echo "<ul>";
     foreach ($result as $resultado) { //para cada dado($resultado) dentro de $result, imprime na tela o que foi consultado
 
-        echo "<li>" . htmlspecialchars($resultado['id'], ENT_QUOTES, 'UTF-8') . htmlspecialchars($resultado['nome'], ENT_QUOTES, 'UTF-8') . "</li>";
+        echo "<li>" . htmlspecialchars($resultado['titulo'], ENT_QUOTES, 'UTF-8') . htmlspecialchars($resultado['responsavel_id'], ENT_QUOTES, 'UTF-8') . "</li>";
     }
     echo "</ul>";
 
