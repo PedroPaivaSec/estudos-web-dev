@@ -3,10 +3,8 @@
 session_start();
 require_once __DIR__ . '/../config/connect.php';
 
-$flash = null;
-
 try {
-  $query = "SELECT id, titulo, status FROM tarefas WHERE responsavel_id IS NULL ORDER BY id";
+  $query = "SELECT id, titulo, status, responsavel_id FROM tarefas ORDER BY id";
   $stmt = $pdo->prepare($query);
   $stmt->execute();
   $tarefas = $stmt->fetchAll();
@@ -16,7 +14,7 @@ try {
 }
 
 if (isset($_SESSION['flash'])) {
-  $flash = $_SESSION['flash'];
+  $flash = $_SESSION['flash'] ?? '';
   unset($_SESSION['flash']);
 }
 ?>
@@ -49,18 +47,13 @@ if (isset($_SESSION['flash'])) {
       <button type="submit">reset</button>
     </form>
 
-    <!-- Mensagem de retorno: o PHP imprime UMA destas duas, conforme o resultado -->
-    <?php if (isset($flash)) {
-
-      if (isset($flash['sucesso'])) { ?>
-        <div class="aviso ok" role="status"> <?php echo htmlspecialchars($flash['sucesso'], ENT_QUOTES, 'UTF-8') ?></div>
-      <?php } elseif (isset($flash['erro'])) { ?>
-        <div class="aviso erro" role="alert"><?php echo htmlspecialchars($flash['erro'], ENT_QUOTES, 'UTF-8') ?></div>
+    <?php if (isset($flash['sucesso'])) { ?>
+      <div class="aviso ok" role="status"> <?php echo htmlspecialchars($flash['sucesso'], ENT_QUOTES, 'UTF-8') ?></div>
+    <?php } elseif (isset($flash['erro'])) { ?>
+      <div class="aviso erro" role="alert"><?php echo htmlspecialchars($flash['erro'], ENT_QUOTES, 'UTF-8') ?></div>
     <?php
-      }
-    } ?>
-
-    <?php if (!isset($_SESSION['usuario_id'])) { ?>
+    }
+    if (!isset($_SESSION['usuario_id'])) { ?>
 
       <div class="aviso erro" role="alert">Clique em trocar para Assumir a tarefa.</div>
     <?php } ?>
@@ -76,13 +69,15 @@ if (isset($_SESSION['flash'])) {
       </thead>
       <tbody>
         <?php foreach ($tarefas as $tarefa) {
-          $rotulo = ['em_aguardo' => 'Em Aguardo', 'em_andamento' => 'Em Andamento', 'conluida' => 'Concluida'];
-          $rotuloTrad = $rotulo[$tarefa['status']] ?? 'Desconhecido'; ?>
+          $rotulo = ['em_aguardo' => 'Em Aguardo', 'em_andamento' => 'Em Andamento', 'concluida' => 'Concluida'];
+          $rotuloTrad = $rotulo[$tarefa['status']] ?? 'Desconhecido';
+          $userid = ['1' => 'Ana', '2' => 'Bruno'];
+          $useridTrad = $userid[$tarefa['responsavel_id']] ?? 'Ninguém' ?>
           <tr>
             <td><?php echo htmlspecialchars($tarefa['titulo'], ENT_QUOTES, 'UTF-8') ?></td>
 
             <td><?php echo htmlspecialchars($rotuloTrad, ENT_QUOTES, 'UTF-8') ?></td>
-            <td>Ninguém</td>
+            <td><?php echo htmlspecialchars($useridTrad, ENT_QUOTES, 'UTF-8') ?></td>
             <td>
               <form method="post" action="../config/assumir.php">
                 <input type="hidden" name="tarefa_id" value="<?php echo htmlspecialchars($tarefa['id'], ENT_QUOTES, 'UTF-8') ?>">
