@@ -1,8 +1,8 @@
-# Exercício 1: atribuição de tarefa solta
+# Laboratório 02 - Exercício 1: atribuição de tarefa solta
 
 Exercício isolado do projeto FiscalWeb (sistema web de tarefas e controle de extração de notas de um escritório contábil). Objetivo: praticar PHP puro com PDO, sessão e validação de entrada antes de levar esses conceitos para o sistema real.
 
-**Status:** em andamento. A funcionalidade principal está pronta. Restam as pendências listadas em "Limitações e pendências".
+**Status:** Concluído. Restam as pendências listadas em "Limitações e pendências".
 
 ## Problema
 
@@ -41,14 +41,14 @@ O arquivo `public/ex2_transicoes.php` pertence ao Exercício 2 e não é coberto
   - [x] Interromper o script no `catch` com mensagem genérica, sem detalhes técnicos
 - [x] **Etapa 2: validar `tarefa_id` no `assumir.php`**
   - [x] `filter_var` com `FILTER_VALIDATE_INT` e comparação com `=== false`
-- [ ] **Etapa 3: listagem no `ex1_assumir.php`**
+- [x] **Etapa 3: listagem no `ex1_assumir.php`**
   - [x] `teste_lista.php` isolado funcionando (regra do exercício isolado)
   - [x] SELECT das tarefas soltas (`responsavel_id IS NULL`)
   - [x] `fetchAll` e `foreach` no `<tbody>`
   - [x] `value` do campo escondido com o id real da tarefa
   - [x] Todo texto vindo do banco com `htmlspecialchars`
   - [x] Status do banco traduzido para texto legível por dicionário
-  - [ ] Mensagem quando não há tarefas soltas
+  - [x] Mensagem quando não há tarefas soltas
 - [x] **Etapa 4: resultado atravessar o redirecionamento**
   - [x] `assumir.php` grava o resultado na sessão, em uma única chave (`flash`), com tipo (`sucesso` ou `erro`) e texto: `rowCount()` igual a 1 gera `sucesso`, qualquer outro valor gera `erro`, e falha do banco no `catch` também gera `erro`
   - [x] `ex1_assumir.php` lê a mensagem no topo, antes do HTML, apaga da sessão na mesma hora e só imprime no HTML, escapada com `htmlspecialchars`, uma única vez
@@ -101,7 +101,6 @@ Segurança:
 
 Funcionais:
 
-- A listagem não trata o caso sem tarefas soltas: a tabela aparece só com o cabeçalho.
 - `rowCount() = 0` não distingue "tarefa já assumida" de "ID inexistente", então o aviso pode não descrever a causa exata.
 - O reset zera o responsável de todas as tarefas dos usuários 1 e 2, inclusive as que já nasciam atribuídas no `bd.sql`. Depois dele, tarefas "Em andamento" e "Concluída" aparecem na lista como assumíveis. Para voltar ao estado original, rode o `bd.sql` de novo.
 - Falha do banco na listagem interrompe a página com `die` e mensagem genérica, sem o layout.
