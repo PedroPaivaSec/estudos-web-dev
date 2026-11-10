@@ -1,5 +1,5 @@
 <?php
-
+// sem tratamentos por simular um login
 session_start();
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
