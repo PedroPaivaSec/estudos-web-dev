@@ -14,6 +14,7 @@ try {
 }
 
 $flash = null;
+$rotulo = ['em_aguardo' => 'Em Aguardo', 'em_andamento' => 'Em Andamento', 'concluida' => 'Concluída'];
 
 if (isset($_SESSION['flash'])) {
   $flash = $_SESSION['flash'];
@@ -50,16 +51,16 @@ if (isset($_SESSION['flash'])) {
       <button type="submit">reset</button>
     </form>
 
-    <?php if (isset($flash['sucesso'])) { ?>
+    <?php if (isset($flash['sucesso'])) : ?>
       <div class="aviso ok" role="status"> <?php echo htmlspecialchars($flash['sucesso'], ENT_QUOTES, 'UTF-8') ?></div>
-    <?php } elseif (isset($flash['erro'])) { ?>
+    <?php elseif (isset($flash['erro'])) : ?>
       <div class="aviso erro" role="alert"><?php echo htmlspecialchars($flash['erro'], ENT_QUOTES, 'UTF-8') ?></div>
     <?php
-    }
-    if (!isset($_SESSION['usuario_id'])) { ?>
+    endif;
+    if (!isset($_SESSION['usuario_id'])) : ?>
 
       <div class="aviso erro" role="alert">Clique em trocar para Assumir a tarefa.</div>
-    <?php } ?>
+    <?php endif; ?>
 
     <table>
       <thead>
@@ -71,13 +72,11 @@ if (isset($_SESSION['flash'])) {
         </tr>
       </thead>
       <tbody>
-        <?php
-
-        $rotulo = ['em_aguardo' => 'Em Aguardo', 'em_andamento' => 'Em Andamento', 'concluida' => 'Concluida'];
-        foreach ($tarefas as $tarefa) {
-          $rotuloTrad = $rotulo[$tarefa['status']] ?? 'Desconhecido';
-          if (!empty($tarefa['responsavel_id'])) {
-        ?>
+        <?php if (empty($tarefas)) : ?>
+          <td>Nenhuma tarefa para assumir.</td>
+          <?php else :
+          foreach ($tarefas as $tarefa) :
+            $rotuloTrad = $rotulo[$tarefa['status']] ?? 'Desconhecido'; ?>
             <tr>
               <td><?php echo htmlspecialchars($tarefa['titulo'], ENT_QUOTES, 'UTF-8') ?></td>
 
@@ -90,11 +89,8 @@ if (isset($_SESSION['flash'])) {
                 </form>
               </td>
             </tr>
-        <?php } else {
-            echo '<p>' . "nenhuma tarefa" . '</p>';
-          }
-        }
-        ?>
+          <?php endforeach; ?>
+        <?php endif; ?>
       </tbody>
     </table>
   </main>
